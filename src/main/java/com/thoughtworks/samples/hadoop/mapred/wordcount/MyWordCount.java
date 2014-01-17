@@ -23,12 +23,6 @@ public class MyWordCount extends Configured implements Tool {
     Job wordCountJob = new Job(conf, "MyWordCount");
     wordCountJob.setJarByClass(MyWordCount.class);
     wordCountJob.setMapperClass(DomainCountMapper.class);
-//        if (conf.getBoolean("wordcount.runcombiner", false)) {
-    wordCountJob.setCombinerClass(WCReducer.class);
-//        }
-    if (conf.getBoolean("wordcount.partitioner.lexical", true)) {
-      wordCountJob.setPartitionerClass(LexicalPartitioner.class);
-    }
     wordCountJob.setReducerClass(WCReducer.class);
     wordCountJob.setOutputKeyClass(Text.class);
     wordCountJob.setOutputValueClass(IntWritable.class);
